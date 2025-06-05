@@ -40,6 +40,18 @@ export default function Carousel() {
             }}
           >
             <img src={item} alt={`Slide ${idx + 1}`} className="w-full h-full object-cover select-none" />
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-white pb-40" style={{ background: "#00000060" }}>
+              <div className="font-bold uppercase mb-4">Welcome! Start Growing Your Business Today</div>
+              <div className="text-center text-7xl font-semibold my-6">
+                Best Solutions <br /> Intro for Your Business
+              </div>
+              <div className="text-center">
+                Porttitor ornare fermentum aliquam pharetra facilisis gravida risus suscipit <br /> Dui feugiat fusce conubia ridiculus tristique parturient
+              </div>
+              <div className="mt-8">
+                <button className="bg-white text-black px-8 py-3 text-lg rounded-xl cursor-pointer hover:bg-[var(--primary-color)] hover:text-white">Get started</button>
+              </div>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

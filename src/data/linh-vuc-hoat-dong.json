@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "title": "Vật tư y tế",
+      "description": "Mô tả 1",
+      "img": "https://sunjsc.vn/uploads/images/13.jpg"
+    },
+    {
+      "title": "Mỹ phẩm",
+      "description": "Mô tả 2",
+      "img": "https://sunjsc.vn/uploads/images/gioi-thieu/nguyen-lieu-my-pham-handmade-2.jpg"
+    }
+  ]
+}
