@@ -26,7 +26,7 @@ export default function Carousel() {
           disableOnInteraction: false, // continues autoplay after interaction
         }}
         loop={true}
-        className="overflow-hidden"
+        className="overflow-hidden carousel"
       >
         {data.map((item, idx) => (
           <SwiperSlide

@@ -1,54 +1,61 @@
-import { useState } from "react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import data from "../data/san-pham.json";
+import useWindowSize from "../hooks/useWindowSize";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+// eslint-disable-next-line react-refresh/only-export-components
+export const chunkArray = (array, chunkSize) => {
+  if (!Array.isArray(array) || chunkSize <= 0) return [];
+
+  const result = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    result.push(array.slice(i, i + chunkSize));
+  }
+  return result;
+};
+
 const SanPham = () => {
-  // const { width } = useWindowSize();
-  const [showMore, setshowMore] = useState(false);
-  const data2 = showMore ? data : [...data].splice(0, 8);
+  const { width } = useWindowSize();
+  const ITEM_IN_SLIDE = width < 414 ? 1 : width < 768 ? 2 : width < 1024 ? 3 : 4;
+  const mapData = chunkArray(data, ITEM_IN_SLIDE);
   return (
-    <div className="bg-[#f1f1f1] py-20">
-      <div className="container mx-auto p-2">
-        <div className="flex justify-between items-center  mb-4">
-          <div className="font-bold text-2xl uppercase tracking-widest">Sản phẩm nổi bật</div>
-          <button className="mt-4 bg-white px-4 py-1 rounded text-sm cursor-pointer" onClick={() => setshowMore(!showMore)}>
-            {showMore ? "Ẩn bớt" : "Xem thêm"}
-          </button>
-        </div>
-        {/* <Swiper
+    <div className="py-30" style={{ backgroundImage: 'url("https://png.pngtree.com/png-clipart/20240627/original/pngtree-grungy-off-white-textured-background-png-image_15427218.png")' }}>
+      <div className="container mx-auto p-4 ">
+        <div className="font-bold text-4xl uppercase tracking-widest text-center ">Sản phẩm nổi bật</div>
+        <Swiper
           modules={[Navigation, Autoplay]}
           spaceBetween={20}
-          slidesPerView={width > 1320 ? 4 : width > 1030 ? 3 : width > 670 ? 2 : 1}
+          slidesPerView={1}
+          navigation
           pagination={{ clickable: true }}
-          navigation={true}
           autoplay={{
-            delay: 3000, // 3 seconds
+            delay: 5000, // 3 seconds
             disableOnInteraction: false, // continues autoplay after interaction
           }}
           loop={true}
-          className="overflow-hidden"
+          grabCursor={true}
+          className="overflow-hidden mt-6 swipper-product"
         >
-          {data.map((item, idx) => (
-            <SwiperSlide key={idx} className="relative bg-white" style={{ border: "1px solid #00000017" }}>
-              <div className="overflow-hidden rounded-lg">
-                <img
-                  src={item.img}
-                  alt={`Slide ${idx + 1}`}
-                  className="w-full h-72 object-cover select-none transition-transform duration-300 ease-in-out transform hover:scale-105"
-                />
+          {mapData.map((item, idx) => (
+            <SwiperSlide key={idx} className={`relative `}>
+              <div className={`grid lg:grid-cols-4 grid-cols-${ITEM_IN_SLIDE} gap-4`}>
+                {item.map((subItem, index) => (
+                  <div className={`bg-white  rounded`} style={{ boxShadow: "0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.16)" }}>
+                    <div className="overflow-hidden rounded-lg">
+                      <img src={subItem.img} alt={`Slide ${index + 1}`} className="rounded bg-white w-full h-72 object-cover select-none transition-transform duration-300 ease-in-out transform hover:scale-105" />
+                    </div>
+                    <div className="px-6 py-4 text-right">
+                      <div className=" font-bold ">{subItem.name}</div>
+                      <div className="">Liên hệ</div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="px-4 py-4 text-center font-bold ">{item.name}</div>
             </SwiperSlide>
           ))}
-        </Swiper> */}
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
-          {data2.map((item, idx) => (
-            <div key={idx} className="relative bg-white rounded cursor-pointer" style={{ border: "1px solid #00000017" }}>
-              <div className="overflow-hidden rounded-lg">
-                <img src={item.img} alt={`Slide ${idx + 1}`} className="w-full h-72 object-cover select-none transition-transform duration-300 ease-in-out transform hover:scale-105" />
-              </div>
-              <div className="px-4 py-4 text-center font-bold ">{item.name}</div>
-            </div>
-          ))}
-        </div>
+        </Swiper>
       </div>
     </div>
   );

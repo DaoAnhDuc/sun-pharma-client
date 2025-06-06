@@ -3,13 +3,15 @@
 body {
   padding: 0;
   margin: 0;
+  font-family: "Quicksand", sans-serif;
+  color: #5d666f;
 }
 
 @theme {
-  --font-display: 'Roboto', "sans-serif";
+  --font-display: "Quicksand", sans-serif;
   --breakpoint-2xl: 80rem;
   --breakpoint-xl: 80rem;
-  --primary-color: #BA0000;
+  --primary-color: #20282d;
   --color-avocado-100: oklch(0.99 0 0);
   --color-avocado-200: oklch(0.98 0.04 113.22);
   --color-avocado-300: oklch(0.94 0.11 115.03);
@@ -20,7 +22,9 @@ body {
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
   /* ... */
 }
-
+.swiper-tin-tuc-su-kien{
+  padding-bottom: 60px !important;
+}
 .swiper-tin-tuc-su-kien .swiper-button-prev,
 .swiper-tin-tuc-su-kien .swiper-button-next {
   display: none !important;
@@ -29,7 +33,6 @@ body {
 .swiper-tin-tuc-su-kien .swiper-pagination {
   text-align: right !important;
   padding-right: 1rem;
-  /* hoặc bao nhiêu bạn muốn */
 }
 
 .swiper-tin-tuc-su-kien .swiper-pagination-bullet {
@@ -42,15 +45,15 @@ body {
   width: 14px;
   height: 14px;
   opacity: 1;
-  background: #fff !important;
+  background: var(--primary-color) !important;
 }
 
 .ant-dropdown-menu-item:hover {
   background: blue;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.carousel .swiper-button-prev,
+.carousel .swiper-button-next {
   width: 60px !important;
   height: 60px !important;
   border-radius: 30px;
@@ -60,21 +63,44 @@ body {
   align-items: center;
 }
 
-.swiper-button-prev{
+.carousel .swiper-button-prev {
   left: 60px !important;
 }
 
-.swiper-button-next{
+.carousel .swiper-button-next {
   right: 60px !important;
 }
 
-.swiper-button-prev:after,
-.swiper-button-next:after{
+.carousel .swiper-button-prev:after,
+.carousel .swiper-button-next:after {
   font-size: 28px !important;
   color: black;
 }
 
-.swiper-button-prev:hover {
+.carousel .swiper-button-prev:hover {
   background: var(--primary-color);
-  
+}
+
+.swipper-product {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.swipper-product .swiper-button-prev,
+.swipper-product .swiper-button-next{
+  display: none;
+}
+
+.swipper-product .swiper-pagination {
+  top: 0px !important;
+}
+
+.swipper-product .swiper-pagination-bullet {
+  width: 16px !important;
+  height: 16px !important;
+  border: 2px solid #fff;
+  padding: 1px !important;
+}
+
+.swipper-product .swiper-pagination-bullet-active {
+  background: var(--primary-color) !important;
 }

@@ -7,7 +7,7 @@ const LayoutSunPharma = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative text-[var(--primary-color)]">
       <div className="bg-[#fff] sticky top-0 left-0 w-full z-40">
         <div className="container mx-auto h-20 flex justify-between items-center">
           <Link to={"/"}>
