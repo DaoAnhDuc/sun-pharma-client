@@ -43,7 +43,7 @@ const SanPham = () => {
               <div className={`grid lg:grid-cols-4 grid-cols-${ITEM_IN_SLIDE} gap-4`}>
                 {item.map((subItem, index) => (
                   <div className={`bg-white  rounded`} style={{ boxShadow: "0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.16)" }}>
-                    <div className="overflow-hidden rounded-lg">
+                    <div className="overflow-hidden rounded-lg p-4">
                       <img src={subItem.img} alt={`Slide ${index + 1}`} className="rounded bg-white w-full h-72 object-contain select-none transition-transform duration-300 ease-in-out transform hover:scale-105" />
                     </div>
                     <div className="px-6 py-4 text-right">
