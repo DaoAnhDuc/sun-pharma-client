@@ -22,7 +22,7 @@ body {
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
   /* ... */
 }
-.swiper-tin-tuc-su-kien{
+.swiper-tin-tuc-su-kien {
   padding-bottom: 60px !important;
 }
 .swiper-tin-tuc-su-kien .swiper-button-prev,
@@ -86,7 +86,7 @@ body {
   padding-bottom: 10px !important;
 }
 .swipper-product .swiper-button-prev,
-.swipper-product .swiper-button-next{
+.swipper-product .swiper-button-next {
   display: none;
 }
 
@@ -103,4 +103,47 @@ body {
 
 .swipper-product .swiper-pagination-bullet-active {
   background: var(--primary-color) !important;
+}
+
+/* Tablet: từ 768px đến dưới 1024px */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .carousel .swiper-button-prev {
+    left: 30px !important;
+  }
+
+  .carousel .swiper-button-next {
+    right: 30px !important;
+  }
+  .carousel .swiper-button-prev,
+  .carousel .swiper-button-next {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .carousel .swiper-button-prev:after,
+  .carousel .swiper-button-next:after {
+    font-size: 24px !important;
+    color: black;
+  }
+}
+
+/* Mobile: nhỏ hơn 768px */
+@media (max-width: 767px) {
+  .carousel .swiper-button-prev {
+    left: 10px !important;
+  }
+
+  .carousel .swiper-button-next {
+    right: 10px !important;
+  }
+
+  .carousel .swiper-button-prev,
+  .carousel .swiper-button-next {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .carousel .swiper-button-prev:after,
+  .carousel .swiper-button-next:after {
+    font-size: 20px !important;
+    color: black;
+  }
 }

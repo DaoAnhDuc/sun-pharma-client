@@ -4,7 +4,7 @@ import { faPhoneAlt, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const GioiThieu = () => {
   return (
-    <div className="py-30">
+    <div className="lg:py-30 py-10">
       <div className="container mx-auto grid lg:grid-cols-2 grid-cols-1 gap-10 p-4">
         <div className="relative">
           <div className="absolute top-10 bg-[var(--primary-color)] text-white w-48 h-48 flex justify-center items-center flex-col rounded-2xl gap-2 md:scale-100 scale-75">
@@ -20,7 +20,7 @@ const GioiThieu = () => {
         </div>
         <div className="text-justify">
           <div className="font-bold tracking-widest mb-4 uppercase">{data.title}</div>
-          <div className="font-bold mb-4 uppercase text-4xl text-left leading-12 text-[var(--primary-color)]">{data.name}</div>
+          <div className="font-bold mb-4 uppercase lg:text-4xl text-2xl text-left lg:leading-12 leading-8 text-[var(--primary-color)]">{data.name}</div>
           <div className="flex gap-6  items-center">
             <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
           </div>

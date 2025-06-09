@@ -5,7 +5,7 @@ import data from "../data/trang-tintuc.json";
 const TinTuc = () => {
   const { width } = useWindowSize();
   return (
-    <div className="py-30 select-none" style={{ backgroundImage: 'url("https://png.pngtree.com/png-clipart/20240627/original/pngtree-grungy-off-white-textured-background-png-image_15427218.png")' }}>
+    <div className="lg:py-30 py-16 select-none" style={{ backgroundImage: 'url("https://png.pngtree.com/png-clipart/20240627/original/pngtree-grungy-off-white-textured-background-png-image_15427218.png")' }}>
       <div className="container mx-auto p-4">
         <div className="font-bold text-4xl uppercase tracking-widest text-center ">Tin tức và sự kiện</div>
         <div className="mt-10">
