@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
@@ -6,12 +6,34 @@ import "swiper/css/pagination";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import useWindowSize from "../hooks/useWindowSize";
+import { toast } from "react-toastify";
 
+import { getLinkImage, SERVER } from "../util";
 export default function Carousel() {
-  const [data, _setData] = useState(["./images/banner.jpg", "./images/banner1.jpg", "./images/banner-05.jpg"]);
+  const [data, setData] = useState([]);
   const { width } = useWindowSize();
   const height = width / (1900 / 1000);
+  useEffect(() => {
+    fetchData("banner");
 
+    return () => {};
+  }, []);
+
+  const fetchData = async (value) => {
+    try {
+      const url = "/get-data?name=" + value;
+
+      const res = await SERVER.API?.post(url, { name: value });
+
+      if (res.status === 200) {
+        setData(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+
+      toast.error(error.message);
+    }
+  };
   if (data.length === 0) return null;
   return (
     <div className="relative w-full">
@@ -39,17 +61,13 @@ export default function Carousel() {
               minHeight: 240,
             }}
           >
-            <img src={item} alt={`Slide ${idx + 1}`} className="w-full h-full object-cover select-none" />
+            <img src={getLinkImage(item?.image)} alt={`Slide ${idx + 1}`} className="w-full h-full object-cover select-none" />
             <div className="absolute inset-0 flex flex-col lg:gap-10 md:gap-5 gap-1 justify-center items-center text-white lg:pb-20 pb-0" style={{ background: "#00000060" }}>
-              <div className="font-bold uppercase">Welcome! Start Growing Your Business Today</div>
-              <div className="text-center lg:text-7xl md:text-4xl text-xl font-semibold">
-                Best Solutions <br /> Intro for Your Business
-              </div>
-              <div className="text-center">
-                Porttitor ornare fermentum aliquam pharetra facilisis gravida risus suscipit <br /> Dui feugiat fusce conubia ridiculus tristique parturient
-              </div>
+              <div className="font-bold uppercase" dangerouslySetInnerHTML={{ __html: item?.subTitle }}></div>
+              <div className="text-center lg:text-7xl md:text-4xl text-xl font-semibold" dangerouslySetInnerHTML={{ __html: item?.title }}></div>
+              <div className="text-center" dangerouslySetInnerHTML={{ __html: item.description }}></div>
               <div className="">
-                <button className="bg-white text-black lg:px-8 lg:py-3 px-4 py-1 text-lg rounded-xl cursor-pointer hover:bg-[var(--primary-color)] hover:text-white">Get started</button>
+                <button className="bg-white text-black lg:px-8 lg:py-3 px-4 py-1 text-lg rounded-xl cursor-pointer hover:bg-[var(--primary-color)] hover:text-white">{item?.button}</button>
               </div>
             </div>
           </SwiperSlide>
