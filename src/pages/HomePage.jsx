@@ -13,10 +13,16 @@ import { SERVER } from "../util";
 
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [loading, setloading] = useState(true);
   useEffect(() => {
     const SERVER_URL = localStorage.getItem("SERVER");
+    window.login = () => {
+      setIsLogin(true);
+    };
+    window.logout = () => {
+      setIsLogin(false);
+    };
     if (SERVER_URL) {
       console.log(SERVER_URL);
       SERVER.URL = SERVER_URL;
@@ -37,7 +43,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Carousel  />
+      <Carousel />
       <GioiThieu isLogin={isLogin} />
       <SanPham />
       <LinhVucHoatDong />
