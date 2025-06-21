@@ -3,22 +3,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getLinkImage, SERVER } from "../util";
+import { getLinkImage, SERVER } from "../../util";
 import { Button } from "antd";
 import GioiThieuModal from "./GioiThieuModal";
+import { EditOutlined } from "@ant-design/icons";
 
 const GioiThieu = ({ isLogin }) => {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState(null);
   useEffect(() => {
     fetchData("ve-chung-toi");
-    return () => {};
+    return () => { };
   }, []);
 
   const fetchData = async (value) => {
     try {
-      const url = "/get-data?name=" + value;
-      const res = await SERVER.API?.post(url, { name: value });
+      const url = "/api/get-data?name=" + value;
+      const res = await SERVER.API?.get(url);
       if (res.status === 200) {
         setData(res.data);
       }
@@ -32,10 +33,17 @@ const GioiThieu = ({ isLogin }) => {
     <div className="lg:py-30 py-10">
       {isLogin && (
         <div className="container mx-auto text-center">
-          <Button danger style={{width: 400}} size="large" onClick={() => setShowModal(true)}>
-            Edit
+          <Button danger block size="large" onClick={() => setShowModal(true)}>
+            <EditOutlined /> Chỉnh sửa Về chúng tôi
           </Button>
-          {showModal && <GioiThieuModal isOpen={true} onClose={() => setShowModal(false)} data={data} fetchData={() => fetchData("ve-chung-toi")} />}
+          {showModal && (
+            <GioiThieuModal
+              isOpen={true}
+              onClose={() => setShowModal(false)}
+              data={data}
+              fetchData={() => fetchData("ve-chung-toi")}
+            />
+          )}
         </div>
       )}
       <div className="container mx-auto grid lg:grid-cols-2 grid-cols-1 gap-10 p-4">
@@ -53,7 +61,9 @@ const GioiThieu = ({ isLogin }) => {
         </div>
         <div className="text-justify">
           <div className="font-bold tracking-widest mb-4 uppercase">{data?.title}</div>
-          <div className="font-bold mb-4 uppercase lg:text-4xl text-2xl text-left lg:leading-12 leading-8 text-[var(--primary-color)]">{data?.name}</div>
+          <div className="font-bold mb-4 uppercase lg:text-4xl text-2xl text-left lg:leading-12 leading-8 text-[var(--primary-color)]">
+            {data?.name}
+          </div>
           <div className="flex gap-6  items-center">
             <div dangerouslySetInnerHTML={{ __html: data?.description }}></div>
           </div>

@@ -1,8 +1,9 @@
-import { Input } from "antd";
+import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import { Button, Input } from "antd";
 import { useEffect, useRef, useState } from "react";
-import SimpleEditor from "../components/SimpleEditor";
-import { SERVER } from "../util";
 import { toast } from "react-toastify";
+import SimpleEditor from "../../components/SimpleEditor";
+import { SERVER } from "../../util";
 const GioiThieuModal = ({ isOpen, onClose, data, fetchData }) => {
   const [formData, setFormData] = useState({
     ...data,
@@ -23,10 +24,16 @@ const GioiThieuModal = ({ isOpen, onClose, data, fetchData }) => {
     setFormData((prev) => ({ ...prev, checkList: updated }));
   };
 
+  const handleChecklistAdd = () => {
+    setFormData((prev) => ({ ...prev, checkList: [...prev.checkList, ''] }))
+  };
+
+  const handleChecklistDelete = (index) => {
+    setFormData((prev) => ({ ...prev, checkList: [...prev.checkList].filter((_item, idex) => index !== idex) }));
+  };
+
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    console.log(files[0]);
-    
     if (files.length > 0) {
       setFormData((prev) => ({ ...prev, [name]: files[0] }));
     }
@@ -51,7 +58,7 @@ const GioiThieuModal = ({ isOpen, onClose, data, fetchData }) => {
     if (res.status === 200) {
       fetchData();
       onClose();
-      toast.success(res.message)
+      toast.success(res.message);
     } else {
       alert("Error");
     }
@@ -61,7 +68,7 @@ const GioiThieuModal = ({ isOpen, onClose, data, fetchData }) => {
     if (text3Ref && text3Ref.current) {
       text3Ref.current.innerHTML = data.description;
     }
-    return () => {};
+    return () => { };
   }, [data?.description]);
 
   if (!isOpen) return null;
@@ -87,7 +94,7 @@ const GioiThieuModal = ({ isOpen, onClose, data, fetchData }) => {
               </div>
               <div>
                 <b>Image Sub</b>
-                <input type="file"  className="border px-6 py-2" name="backgroundSub" onChange={handleFileChange} />
+                <input type="file" className="border px-6 py-2" name="backgroundSub" onChange={handleFileChange} />
               </div>
             </div>
           </div>
@@ -105,17 +112,24 @@ const GioiThieuModal = ({ isOpen, onClose, data, fetchData }) => {
                   console.log(v);
                   setFormData({
                     ...formData,
-                    description: v
-                  })
+                    description: v,
+                  });
                 }}
               />
             </div>
             <div className="text-nowrap flex flex-col gap-3 mt-6">
+              <div className="font-bold">CheckList</div>
               {formData?.checkList.map((i, index) => (
                 <div className="flex gap-2 items-center" key={index}>
                   <Input value={i} onChange={(e) => handleChecklistChange(index, e.target.value)} />
+                  <Button danger icon={<DeleteOutlined />} onClick={() => handleChecklistDelete(index)}></Button>
                 </div>
               ))}
+              <div>
+                <Button icon={<PlusCircleOutlined />} type="primary" onClick={handleChecklistAdd}>
+                  Thêm Checklist
+                </Button>
+              </div>
             </div>
             <div className="flex items-center  mt-6 gap-10 text-nowrap flex-wrap">
               <div className="flex gap-4">

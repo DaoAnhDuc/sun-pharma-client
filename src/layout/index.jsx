@@ -2,6 +2,7 @@ import { faBars, faSortDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link, Outlet } from "react-router";
+import HomePage from "../pages/Home";
 
 const LayoutSunPharma = () => {
   const [open, setOpen] = useState(false);
@@ -73,7 +74,7 @@ const LayoutSunPharma = () => {
         </div>
       </div>
       <div>
-        <Outlet />
+        <HomePage />
       </div>
     </div>
   );
